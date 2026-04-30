@@ -20,7 +20,7 @@ def get_curso(titulo):
     curso = utils.get_one_curso(titulo)
     
     if curso:
-        return jsonify(curso)
+        return jsonify(curso), 200
     
     return jsonify({"erro": "Curso não encontrado"}), 404
 
@@ -52,9 +52,9 @@ def update_curso(titulo):
     updated = utils.update_curso(titulo, descricao, local)
     
     if updated == 0:
-        return jsonify({"message": "Nada foi atualizado"}), 200
+        return jsonify({"message": "Nada foi atualizado"}), 400
     
-    return jsonify({"message": "Curso atualizado com sucesso!"})
+    return jsonify({"message": "Curso atualizado com sucesso!"}), 200
 
 @app.route("/cursos/<titulo>", methods=["DELETE"])
 def deletar_curso(titulo):
@@ -63,7 +63,7 @@ def deletar_curso(titulo):
     if deleted == 0:
         return jsonify({"erro": "Curso não encontrado"}), 404
 
-    return jsonify({"message": f"Curso '{titulo}' deletado com sucesso"})
+    return jsonify({"message": f"Curso '{titulo}' deletado com sucesso"}), 200
 
 if __name__ == "__main__":
     app.run(debug=True)
