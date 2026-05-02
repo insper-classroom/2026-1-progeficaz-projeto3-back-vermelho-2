@@ -1,0 +1,43 @@
+{
+  "lista_cursos": [
+    {
+      "Curso": "Nome do curso",
+      "Descricao": "Explicacao do curso entre 300 e 800 caracteres",
+      "Faculdades": [
+        {
+          "Faculdade": "Nome da faculdade",
+          "Local": "Campus onde o curso esta disponivel",
+          "Disponibilidade": "Público ou Privado"
+        }
+      ],
+      "Carreiras": [
+        "Carreira 1",
+        "Carreira 2"
+      ],
+      "Profissionalizacoes": [
+        "Topico 1",
+        "Topico 2"
+      ]
+    },
+    {
+      "Curso": "Nome do curso",
+      "Descricao": "Explicacao do curso entre 300 e 800 caracteres",
+      "Faculdades": [
+        {
+          "Faculdade": "Nome da faculdade",
+          "Local": "Campus onde o curso esta disponivel",
+          "Disponibilidade": "Público ou Privado",
+          "Mensalidade": "Valor da mensalidade / mostre essa opção apenas se a disponibilidade contar como Privado"
+        }
+      ],
+      "Carreiras": [
+        "Carreira 1",
+        "Carreira 2"
+      ],
+      "Profissionalizacoes": [
+        "Topico 1",
+        "Topico 2"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "retorno_pesquisa": {
+    "sessao": {
+      "id_sessao": "UUID-ou-hash",
+      "data_hora": "YYYY-MM-DDTHH:MM:SSZ",
+      "modelo_ia": "gemma-4-31b-it",
+      "idioma": "pt-BR"
+    },
+    "resumo_entrevista": {
+      "objetivo_principal": "Texto curto",
+      "nivel_atual": "Iniciante|Intermediario|Avancado",
+      "areas_prioritarias": [
+        "Area 1",
+        "Area 2"
+      ],
+      "tempo_semana_horas": "Faixa estimada",
+      "orcamento": "Faixa estimada",
+      "prazo_resultado": "1|3|6|12 meses",
+      "formato_preferido": [
+        "Formato 1",
+        "Formato 2"
+      ],
+      "barreiras_principais": [
+        "Barreira 1",
+        "Barreira 2"
+      ]
+    },
+    "respostas_questionario": [
+      {
+        "id_pergunta": "Q01",
+        "pergunta_exibida": "Texto que foi mostrado ao usuario (podendo variar)",
+        "resposta_usuario": "Texto da resposta",
+        "valor_normalizado": "Valor padrao para score"
+      }
+    ],
+    "perfil_estruturado": {
+      "momento_carreira": "Entrada|Transicao|Evolucao",
+      "foco_principal": "Ex: Dados, Front-end, Gestao",
+      "intensidade_estudo": "Baixa|Media|Alta",
+      "grau_autonomia": "Baixo|Medio|Alto",
+      "risco_evasao": "Baixo|Medio|Alto"
+    },
+    "recomendacoes_cursos": [
+      {
+        "ranking": 1,
+        "nome_curso": "Nome do curso recomendado",
+        "tipo_formacao": "Curso livre|Bootcamp|Tecnologo|Graduacao|Certificacao",
+        "nivel_indicado": "Iniciante|Intermediario|Avancado",
+        "duracao_estimada": "Ex: 3 meses",
+        "faixa_preco": "Ex: R$ 0 a R$ 200/mes",
+        "modalidade": "Online|Presencial|Hibrido",
+        "score_aderencia": 0,
+        "explicacao_fit": "Resumo de por que esse curso combina com o perfil / (Não precisa colocar literalmente o número da questão como Q10,Q1,etc)",
+        "pontos_atencao": [
+          "Ponto 1",
+          "Ponto 2"
+        ],
+        "plano_acao_30_dias": [
+          "Acao 1",
+          "Acao 2",
+          "Acao 3"
+        ]
+      }
+    ],
+    "metrica_decisao": {
+      "pesos": {
+        "objetivo": 0.30,
+        "nivel": 0.20,
+        "tempo": 0.15,
+        "orcamento": 0.15,
+        "formato": 0.10,
+        "prazo": 0.10
+      },
+      "confianca_geral": "Alta|Media|Baixa",
+      "justificativa_confianca": "Motivo do nivel de confianca / (Não precisa colocar literalmente o número da questão como Q10,Q1,etc), se for relacionar com alguma resposta infere ela ou parafrasea",
+      "dados_faltantes": [
+        "Campo opcional nao informado"
+      ]
+    },
+    "proximas_perguntas_sugeridas": [
+      "Pergunta complementar 1",
+      "Pergunta complementar 2"
+    ]
+  }
+}

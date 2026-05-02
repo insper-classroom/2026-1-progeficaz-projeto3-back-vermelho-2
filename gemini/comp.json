@@ -1,0 +1,24 @@
+{
+    "CursosAnalisados": ["Nome do Curso 1", "Nome do Curso 2"],
+    "ComparacaoGeral": "Um breve parágrafo (300 a 500 caracteres) explicando a principal diferença conceitual entre as duas formações.",
+    "GradeCurricular": {
+        "MateriasEmComum": ["Materia 1", "Materia 2"],
+        "FocoCurso1": ["Topico especifico 1", "Topico especifico 2"],
+        "FocoCurso2": ["Topico especifico 1", "Topico especifico 2"]
+    },
+    "MercadoDeTrabalho": {
+        "CarreirasExclusivasCurso1": ["Carreira A", "Carreira B"],
+        "CarreirasExclusivasCurso2": ["Carreira C", "Carreira D"],
+        "OportunidadesEmComum": ["Setor X", "Setor Y"]
+    },
+    "RecomendacaoPorPerfil": {
+        "EscolhaCurso1Se": [
+            "Motivo comportamental ou de interesse 1",
+            "Motivo 2"
+        ],
+        "EscolhaCurso2Se": [
+            "Motivo comportamental ou de interesse 1",
+            "Motivo 2"
+        ]
+    }
+}

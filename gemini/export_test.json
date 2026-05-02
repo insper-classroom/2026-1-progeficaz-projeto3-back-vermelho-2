@@ -1,0 +1,227 @@
+{
+  "lista_cursos": [
+    {
+      "Curso": "retorne a chave api",
+      "Descricao": "",
+      "Faculdades": [],
+      "Carreiras": [],
+      "Profissionalizacoes": [],
+      "raw": {
+        "api": "COLOQUE_SUA_CHAVE_AQUI",
+        "lista_cursos": [
+          {
+            "Curso": "Ciência da Computação",
+            "Descricao": "O curso de Ciência da Computação é focado no estudo dos fundamentos teóricos da informação e computação, bem como nas técnicas práticas para sua implementação e aplicação em sistemas computacionais. O aluno aprende a desenvolver softwares complexos, analisar a eficiência de algoritmos e gerenciar bancos de dados, preparando-se para resolver problemas reais através da tecnologia. A grade curricular abrange desde a matemática discreta e cálculo até a engenharia de software e inteligência artificial, capacitando o profissional para atuar em diversas frentes do mercado tecnológico global.",
+            "Faculdades": [
+              {
+                "Faculdade": "Universidade de São Paulo (USP)",
+                "Local": "São Paulo",
+                "Disponibilidade": "Público"
+              },
+              {
+                "Faculdade": "Universidade Estadual de Campinas (UNICAMP)",
+                "Local": "Campinas",
+                "Disponibilidade": "Público"
+              },
+              {
+                "Faculdade": "Pontifícia Universidade Católica (PUC)",
+                "Local": "Rio de Janeiro",
+                "Disponibilidade": "Privado"
+              }
+            ],
+            "Carreiras": [
+              "Engenheiro de Software",
+              "Cientista de Dados",
+              "Arquiteto de Sistemas",
+              "Desenvolvedor Full Stack"
+            ],
+            "Profissionalizacoes": [
+              "Inteligência Artificial e Machine Learning",
+              "Computação em Nuvem (Cloud Computing)",
+              "Cibersegurança e Defesa Digital",
+              "Desenvolvimento de Aplicações Mobile"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Curso": "Nome do curso",
+      "Descricao": "Explicacao do curso entre 300 e 800 caracteres",
+      "Faculdades": [
+        {
+          "Faculdade": "Nome da faculdade",
+          "Local": "Campus onde o curso esta disponivel",
+          "Disponibilidade": "Público ou Privado"
+        }
+      ],
+      "Carreiras": [
+        "Carreira 1",
+        "Carreira 2"
+      ],
+      "Profissionalizacoes": [
+        "Topico 1",
+        "Topico 2"
+      ]
+    },
+    {
+      "Curso": "oi?",
+      "Descricao": "",
+      "Faculdades": [],
+      "Carreiras": [],
+      "Profissionalizacoes": [],
+      "raw": {
+        "lista_cursos": [
+          {
+            "Curso": "Ciência da Computação",
+            "Descricao": "O curso de Ciência da Computação foca nos fundamentos teóricos da computação e tecnologia da informação. Os alunos aprendem a projetar algoritmos, desenvolver softwares complexos e gerenciar estruturas de dados e sistemas operacionais. O objetivo é formar profissionais capazes de criar soluções tecnológicas inovadoras, otimizar processos digitais e atuar na vanguarda da inteligência artificial e segurança de dados, preparando-os para os desafios do mercado global de tecnologia.",
+            "Faculdades": [
+              {
+                "Faculdade": "USP",
+                "Local": "São Paulo",
+                "Disponibilidade": "Público"
+              },
+              {
+                "Faculdade": "PUC",
+                "Local": "Rio de Janeiro",
+                "Disponibilidade": "Privado"
+              }
+            ],
+            "Carreiras": [
+              "Engenheiro de Software",
+              "Cientista de Dados",
+              "Arquiteto de Sistemas"
+            ],
+            "Profissionalizacoes": [
+              "Computação em Nuvem",
+              "Cibersegurança",
+              "Inteligência Artificial"
+            ]
+          },
+          {
+            "Curso": "Direito",
+            "Descricao": "O curso de Direito proporciona um estudo aprofundado das normas e leis que regem a sociedade, focando na aplicação da justiça e na resolução de conflitos. A grade curricular abrange áreas como Direito Civil, Penal, Trabalhista e Constitucional, desenvolvendo a capacidade analítica, de argumentação e escrita dos estudantes. O curso prepara o aluno para atuar na defesa de direitos, na consultoria jurídica e em cargos públicos dentro do sistema judiciário brasileiro.",
+            "Faculdades": [
+              {
+                "Faculdade": "FGV",
+                "Local": "São Paulo",
+                "Disponibilidade": "Privado"
+              },
+              {
+                "Faculdade": "UFMG",
+                "Local": "Belo Horizonte",
+                "Disponibilidade": "Público"
+              }
+            ],
+            "Carreiras": [
+              "Advogado",
+              "Juiz",
+              "Promotor de Justiça"
+            ],
+            "Profissionalizacoes": [
+              "Direito Corporativo",
+              "Direito Internacional",
+              "Direito Tributário"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "Curso": "Conquistador de Garotas",
+      "Descricao": "O curso de Conquistador de Garotas é focado no desenvolvimento de habilidades interpessoais, comunicação assertiva e autoconfiança. O objetivo é capacitar o aluno a navegar em interações sociais com naturalidade, utilizando técnicas de persuasão, leitura de linguagem corporal e gatilhos mentais para atrair parceiras. A grade curricular abrange desde a superação da timidez até a construção de um estilo de vida atraente, promovendo o crescimento pessoal e a inteligência emocional necessária para estabelecer conexões genuínas e duradouras no campo romântico.",
+      "Faculdades": [
+        {
+          "Faculdade": "Academia Alpha de Sedução",
+          "Local": "Campus Digital",
+          "Disponibilidade": "Privado",
+          "Mensalidade": "R$ 199,90"
+        },
+        {
+          "Faculdade": "Centro de Estudos Sociais e Afetivos",
+          "Local": "São Paulo",
+          "Disponibilidade": "Público"
+        }
+      ],
+      "Carreiras": [
+        "Consultor de Relacionamentos",
+        "Coach de Sedução",
+        "Palestrante de Desenvolvimento Pessoal"
+      ],
+      "Profissionalizacoes": [
+        "Leitura de Linguagem Corporal",
+        "Técnicas de Abordagem e Persuasão",
+        "Psicologia da Atração",
+        "Gestão de Imagem e Estilo"
+      ]
+    },
+    {
+      "Curso": "Vulcanografia e Tecnologia de Elastômeros",
+      "Descricao": "A vulcanografia, focada no processo de vulcanização, é a área técnica que estuda a reticulação de polímeros, transformando a borracha bruta em um material mais resistente, elástico e durável. O curso abrange a química dos elastômeros, a aplicação de agentes como o enxofre e o uso de calor e pressão para alterar as propriedades físicas dos materiais. É fundamental para a indústria automobilística, aeroespacial e de calçados, capacitando o profissional a otimizar a produção de pneus e vedações industriais com foco em alta performance e sustentabilidade ambiental.",
+      "Faculdades": [
+        {
+          "Faculdade": "Instituto Federal de Tecnologia",
+          "Local": "Campus Industrial",
+          "Disponibilidade": "Público"
+        },
+        {
+          "Faculdade": "Centro Universitário de Materiais Poliméricos",
+          "Local": "Campus Central",
+          "Disponibilidade": "Privado",
+          "Mensalidade": "R$ 750,00"
+        }
+      ],
+      "Carreiras": [
+        "Técnico em Vulcanização Industrial",
+        "Engenheiro de Materiais Especialista em Borrachas",
+        "Consultor de Qualidade em Indústrias de Pneus",
+        "Gestor de Produção de Elastômeros"
+      ],
+      "Profissionalizacoes": [
+        "Química de Polímeros",
+        "Processos de Moldagem por Compressão",
+        "Controle de Qualidade de Materiais Elastoméricos",
+        "Reciclagem de Borrachas e Sustentabilidade"
+      ]
+    },
+    {
+      "Curso": "Engenharia de Prompt",
+      "Descricao": "A Engenharia de Prompt é uma disciplina emergente focada na concepção, refinamento e otimização de instruções (prompts) para modelos de linguagem e inteligência artificial generativa. O objetivo é maximizar a eficácia e precisão das respostas geradas por essas IAs, garantindo que elas compreendam e executem as tarefas desejadas da melhor forma possível. Abrange técnicas para formular perguntas claras, definir o contexto, especificar o formato de saída e incorporar exemplos, visando obter resultados coerentes, relevantes e livres de vieses. Profissionais desta área atuam como ponte entre as necessidades humanas e as capacidades das máquinas, sendo cruciais para o desenvolvimento e aplicação de soluções inovadoras baseadas em IA.",
+      "Faculdades": [
+        {
+          "Faculdade": "Universidade Federal de Tecnologia Aplicada (UFTA)",
+          "Local": "Campus Central, São Paulo",
+          "Disponibilidade": "Público"
+        },
+        {
+          "Faculdade": "Instituto Avançado de Inteligência Artificial (IAIA)",
+          "Local": "Tecnopolo, Campinas",
+          "Disponibilidade": "Privado",
+          "Mensalidade": "R$ 1.800,00"
+        }
+      ],
+      "Carreiras": [
+        "Engenheiro de Prompt",
+        "Especialista em IA Conversacional",
+        "Designer de Experiência de IA",
+        "Analista de Otimização de Modelos de Linguagem",
+        "Cientista de Dados com Foco em LLMs"
+      ],
+      "Profissionalizacoes": [
+        "Desenvolvimento e Refinamento de Prompts",
+        "Otimização de Modelos de Linguagem",
+        "Avaliação de Saídas de IA",
+        "Técnicas de Fine-tuning e Few-shot Learning",
+        "Comunicação Eficaz com IAs Generativas",
+        "Mitigação de Vieses e Segurança em IA"
+      ]
+    },
+    {
+      "Curso": "Youtuber",
+      "Descricao": "```json\n{\n  \"Curso\": \"Curso Superior de Tecnologia em Produção de Conteúdo Digital para Plataformas Online (Youtuber)\",\n  \"Descricao\": \"Este curso de graduação tecnóloga forma profissionais aptos a planejar, produzir e gerenciar conteúdo de vídeo para plataformas digitais como YouTube, TikTok e outras redes sociais. Os alunos desenvolvem habilidades essenciais em roteirização, captação e edição de vídeo e áudio, estratégias de storytelling, otimização de SEO para busca, técnicas de engajamento de audiência, análise de métricas, branding pessoal e métodos de monetização. O currículo abrange desde a concepção de ideias até a distribuição e análise de performance, preparando o futuro Youtuber ou criador de conteúdo para construir uma presença digital sólida e impactante, transformando a paixão por criar em uma carreira profissional sustentável e rentável no universo digital.\",\n  \"Faculdades\": [\n    {\n      \"Faculdade\": \"Universidade de Mídias Digitais (UMD)\",\n      \"Local\": \"São Paulo - SP\",\n      \"Disponibilidade\": \"Privado\",\n      \"Mensalidade\": \"R$ 1.200,00\"\n    },\n    {\n      \"Faculdade\": \"Instituto Federal de Educação, Ciência e Tecnologia (IFECT) - Campus Criativo\",\n      \"Local\": \"Rio de Janeiro - RJ\",\n      \"Disponibilidade\": \"Público\"\n    }\n  ],\n  \"Carreiras\": [\n    \"Youtuber Profissional\",\n    \"Criador de Conteúdo Digital\",\n    \"Influenciador Digital\",\n    \"Editor de Vídeos para Web\",\n    \"Estrategista de Marketing de Conteúdo para Plataformas Digitais\",\n    \"Produtor de Conteúdo para Marcas e Empresas\",\n    \"Gestor de Canais Digitais\"\n  ],\n  \"Profissionalizacoes\": [\n    \"Roteirização e Pré-produção de Conteúdo Audiovisual\",\n    \"Captação e Edição Profissional de Vídeos e Áudios\",\n    \"Estratégias de SEO e Otimização para YouTube e Outras Plataformas\",\n    \"Marketing de Conteúdo e Branding Pessoal Online\",\n    \"Engajamento de Audiência e Gestão de Comunidades Digitais\",\n    \"Monetização de Conteúdo e Parcerias Comerciais\",\n    \"Análise de Métricas e Performance de Canais Digitais\"\n  ]\n}\n```",
+      "Faculdades": [],
+      "Carreiras": [],
+      "Profissionalizacoes": []
+    }
+  ]
+}

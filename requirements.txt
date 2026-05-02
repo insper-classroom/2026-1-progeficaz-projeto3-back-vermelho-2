@@ -1,3 +1,6 @@
-flask
-pymongo
-python-dotenv
+flask>=3.0.0
+pymongo>=4.6.0
+python-dotenv>=1.0.1
+google-genai>=1.15.0
+pydantic>=2.7.0
+pytest>=8.0.0

@@ -1,0 +1,314 @@
+{
+  "questionario_pesquisa": {
+    "versao": "2.0",
+    "idioma": "pt-BR",
+    "publico_alvo": "Alunos saindo do ensino medio em busca de direcao profissional",
+    "total_perguntas": 15,
+    "modo_dinamico": {
+      "permitir_ajuste_ia": true,
+      "nivel_variacao": "leve",
+      "variacao_max_por_pergunta": 2,
+      "manter_intencao_original": true,
+      "nao_repetir_formulacao_na_mesma_sessao": true,
+      "regras": [
+        "Nao alterar o objetivo principal de cada pergunta",
+        "Nao remover perguntas obrigatorias",
+        "Pode trocar palavras por sinonimos e simplificar linguagem",
+        "Pode adaptar exemplos ao contexto da resposta do usuario",
+        "Evitar vies em respostas e recomendacoes",
+        "Foco em descoberta vocacional, nao em transicao profissional"
+      ]
+    },
+    "politica_followup": {
+      "permitir_perguntas_extras": true,
+      "max_perguntas_extras": 2,
+      "gatilhos": [
+        "resposta_ambigua",
+        "resposta_vazia",
+        "multiplas_areas_interesse",
+        "duvida_tipo_formacao"
+      ]
+    },
+    "perguntas_base": [
+      {
+        "id": "Q01",
+        "categoria": "ano_escolar",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha",
+        "pergunta_base": "Em qual ano do ensino medio voce esta?",
+        "variacoes": [
+          "Qual sua serie no momento? Esta cursando qual ano?",
+          "Voce esta no primeiro, segundo ou terceiro ano do EM?"
+        ],
+        "opcoes": [
+          "1o ano do EM",
+          "2o ano do EM",
+          "3o ano do EM",
+          "Ja concluido o EM"
+        ]
+      },
+      {
+        "id": "Q02",
+        "categoria": "interesses_aptidoes",
+        "obrigatoria": true,
+        "tipo_resposta": "multipla_escolha_com_aberto",
+        "pergunta_base": "Quais areas e atividades mais despertam seu interesse?",
+        "variacoes": [
+          "Em quais disciplinas e areas voce se sai melhor na escola?",
+          "Que tipo de trabalho ou atividade te atrai mais?"
+        ],
+        "opcoes": [
+          "Tecnologia e programacao",
+          "Ciencias exatas (Fisica, Quimica, Matematica)",
+          "Ciencias humanas (Historia, Filosofia, Sociologia)",
+          "Artes, Design, Criatividade",
+          "Saude, Biologia, Psicologia",
+          "Gestao, Administracao, Negocios",
+          "Educacao, Ensino",
+          "Idiomas e Comunicacao",
+          "Esportes e Educacao Fisica",
+          "Nao tenho certeza ainda"
+        ]
+      },
+      {
+        "id": "Q03",
+        "categoria": "tipo_formacao",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha_com_aberto",
+        "pergunta_base": "Qual tipo de formacao mais te atrai para o proximo passo?",
+        "variacoes": [
+          "Voce pensa em faculdade, tecnico ou outro caminho?",
+          "Qual formacao te interessa apos o ensino medio?"
+        ],
+        "opcoes": [
+          "Graduacao em universidade publica",
+          "Graduacao em universidade privada",
+          "Curso tecnico profissionalizante",
+          "Bootcamp ou curso acelerado de tecnologia",
+          "Cursos livres e certificacoes online",
+          "Nao sei ainda"
+        ]
+      },
+      {
+        "id": "Q04",
+        "categoria": "situacao_financeira",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha",
+        "pergunta_base": "Como e sua situacao financeira para custear uma formacao?",
+        "variacoes": [
+          "Voce conseguiria pagar ou precisa de bolsa?",
+          "Qual sua capacidade financeira para investir em estudos?"
+        ],
+        "opcoes": [
+          "Preciso de bolsa ou apoio total",
+          "Tenho acesso a bolsa parcial",
+          "Minha familia pode custear",
+          "Posso trabalhar e estudar",
+          "Nao tenho informacao ainda"
+        ]
+      },
+      {
+        "id": "Q05",
+        "categoria": "apoio_familiar",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha",
+        "pergunta_base": "Sua familia apoia sua decisao profissional?",
+        "variacoes": [
+          "Como esta a situacao com sua familia sobre seus planos?",
+          "Sua familia orientou voce sobre que caminho seguir?"
+        ],
+        "opcoes": [
+          "Sim, apoiam completamente minhas escolhas",
+          "Parcialmente, mas existem expectativas",
+          "Tenho pressao para seguir um caminho especifico",
+          "Nao tenho muito apoio ou orientacao familiar",
+          "Nao tenho familia proxima"
+        ]
+      },
+      {
+        "id": "Q06",
+        "categoria": "formato_estudo",
+        "obrigatoria": true,
+        "tipo_resposta": "multipla_escolha",
+        "pergunta_base": "Qual formato de estudo voce prefere?",
+        "variacoes": [
+          "Como voce aprender melhor: presencial, online ou hibrido?",
+          "Que tipo de ambiente de estudo te agrada?"
+        ],
+        "opcoes": [
+          "Presencial em sala de aula",
+          "Online, 100% remoto",
+          "Hibrido (presencial + online)",
+          "Pratico, com laboratorio ou oficina",
+          "Com mentor ou professor particular",
+          "Autodidatura com recursos disponiveis"
+        ]
+      },
+      {
+        "id": "Q07",
+        "categoria": "urgencia_decisao",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha",
+        "pergunta_base": "Quando voce precisa tomar uma decisao sobre seu futuro?",
+        "variacoes": [
+          "Qual e seu prazo para decidir qual caminho seguir?",
+          "Quando voce quer comecar uma formacao?"
+        ],
+        "opcoes": [
+          "Imediatamente, preciso comecar logo",
+          "Ainda neste ano",
+          "No proximo ano letivo",
+          "Tenho tempo, quero explorar mais",
+          "Ainda nao sei"
+        ]
+      },
+      {
+        "id": "Q08",
+        "categoria": "estilo_aprendizado",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha",
+        "pergunta_base": "Qual seu estilo de aprendizado?",
+        "variacoes": [
+          "Voce aprende melhor vendo exemplos praticos ou com teoria?",
+          "O que te motiva mais nos estudos?"
+        ],
+        "opcoes": [
+          "Muito pratico, fazendo projetos reais",
+          "Teoria solida antes de qualquer pratica",
+          "Mistura de tudo, com equilibrio",
+          "Com muita interacao e troca em grupo",
+          "De forma independente, no meu ritmo"
+        ]
+      },
+      {
+        "id": "Q09",
+        "categoria": "barreiras_duvidas",
+        "obrigatoria": true,
+        "tipo_resposta": "multipla_escolha_com_aberto",
+        "pergunta_base": "Quais suas maiores duvidas ou barreiras neste momento?",
+        "variacoes": [
+          "O que voce ainda nao sabe que gostaria de descobrir?",
+          "Qual seu maior medo ou duvida sobre o futuro?"
+        ],
+        "opcoes": [
+          "Nao tenho informacao sobre as carreiras disponiveis",
+          "Tenho duvida se tenho habilidades para seguir este caminho",
+          "Pressao da familia ou da sociedade",
+          "Falta de acesso a informatizacao ou internet",
+          "Medo de fazer escolha errada",
+          "Nao sei como escolher entre varias opcoes",
+          "Questoes financeiras ou de acesso",
+          "Outro"
+        ]
+      },
+      {
+        "id": "Q10",
+        "categoria": "contexto_pessoal",
+        "obrigatoria": true,
+        "tipo_resposta": "aberta_curta",
+        "pergunta_base": "Conte um pouco sobre seu contexto agora: como voce se vê daqui a 5 anos?",
+        "variacoes": [
+          "Descreva seu maior sonho ou objetivo profissional.",
+          "Qual carreira ou profissao voce imagina para si no futuro?"
+        ],
+        "limite_caracteres": 500
+      },
+      {
+        "id": "Q11",
+        "categoria": "preferencia_ambiente_trabalho",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha",
+        "pergunta_base": "Que tipo de ambiente de trabalho combina mais com voce?",
+        "variacoes": [
+          "Em qual ambiente voce imagina se sentindo mais motivado?",
+          "Onde voce renderia melhor no dia a dia profissional?"
+        ],
+        "opcoes": [
+          "Escritorio ou ambiente corporativo",
+          "Laboratorio, clinica ou hospital",
+          "Escola, sala de aula ou treinamento",
+          "Campo, natureza ou atividade externa",
+          "Ambiente criativo, estudio ou agencia",
+          "Home office/remoto"
+        ]
+      },
+      {
+        "id": "Q12",
+        "categoria": "preferencia_rotina",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha",
+        "pergunta_base": "Qual rotina de trabalho voce prefere para o futuro?",
+        "variacoes": [
+          "Voce prefere dias mais previsiveis ou com novidades constantes?",
+          "Que estilo de rotina profissional te agrada mais?"
+        ],
+        "opcoes": [
+          "Rotina organizada e previsivel",
+          "Rotina dinamica com desafios diferentes",
+          "Mistura de organizacao com variedade",
+          "Rotina com metas e alta pressao",
+          "Nao sei ainda"
+        ]
+      },
+      {
+        "id": "Q13",
+        "categoria": "preferencia_interacao",
+        "obrigatoria": true,
+        "tipo_resposta": "unica_escolha",
+        "pergunta_base": "No trabalho, voce prefere atuar mais com pessoas ou com tarefas tecnicas?",
+        "variacoes": [
+          "Qual lado te atrai mais: relacionamento humano ou parte tecnica?",
+          "Voce se imagina mais em contato com pessoas ou resolvendo problemas tecnicos?"
+        ],
+        "opcoes": [
+          "Principalmente com pessoas (atendimento, lideranca, comunicacao)",
+          "Principalmente com tarefas tecnicas (analise, sistemas, processos)",
+          "Equilibrio entre pessoas e tecnico",
+          "Ainda nao sei"
+        ]
+      },
+      {
+        "id": "Q14",
+        "categoria": "valores_profissionais",
+        "obrigatoria": true,
+        "tipo_resposta": "multipla_escolha_com_aberto",
+        "pergunta_base": "Quais fatores sao mais importantes para voce na escolha de uma carreira?",
+        "variacoes": [
+          "O que pesa mais para voce na hora de decidir um curso e profissao?",
+          "Quais prioridades voce quer ver no seu futuro profissional?"
+        ],
+        "opcoes": [
+          "Boa remuneracao",
+          "Estabilidade",
+          "Flexibilidade de horarios",
+          "Impacto social e ajudar pessoas",
+          "Criatividade e liberdade",
+          "Prestigio e reconhecimento",
+          "Rapidez para entrar no mercado",
+          "Outro"
+        ]
+      },
+      {
+        "id": "Q15",
+        "categoria": "preferencia_atividades",
+        "obrigatoria": true,
+        "tipo_resposta": "multipla_escolha_com_aberto",
+        "pergunta_base": "Quais atividades voce mais gosta de fazer no seu tempo livre?",
+        "variacoes": [
+          "Que tipo de atividade voce escolhe espontaneamente quando tem tempo?",
+          "Se pudesse escolher um projeto agora, o que voce faria com mais vontade?"
+        ],
+        "opcoes": [
+          "Resolver desafios logicos e jogos de estrategia",
+          "Criar conteudo (desenho, video, musica, escrita)",
+          "Cuidar de pessoas, animais ou bem-estar",
+          "Organizar eventos, grupos ou projetos",
+          "Montar, construir ou consertar coisas",
+          "Ler, pesquisar e aprender assuntos novos",
+          "Praticar esportes ou atividades fisicas",
+          "Outro"
+        ]
+      }
+    ]
+  }
+}

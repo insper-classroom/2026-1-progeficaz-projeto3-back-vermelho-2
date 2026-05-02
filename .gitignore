@@ -1,2 +1,5 @@
 .cred
 __pycache__
+gemini/.env
+gemini/.venv/
+gemini/*.db
