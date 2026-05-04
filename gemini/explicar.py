@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Chama a função `explicar()` definida em `api gemini.py`.
+"""Chama a função `explicar()` definida em `api_gemini.py`.
 
 Carrega o arquivo pelo caminho (não importa que o nome do arquivo contenha espaços)
 e executa a função `explicar()`.
@@ -17,7 +17,7 @@ def load_module_from_path(path: Path, module_name: str):
 
 
 if __name__ == "__main__":
-    script_path = Path(__file__).with_name("api gemini.py")
+    script_path = Path(__file__).with_name("api_gemini.py")
     if not script_path.exists():
         print(f"Arquivo não encontrado: {script_path}")
         sys.exit(1)
@@ -26,5 +26,5 @@ if __name__ == "__main__":
     if hasattr(mod, "explicar"):
         mod.explicar()
     else:
-        print("Função 'explicar' não encontrada em api gemini.py")
+        print("Função 'explicar' não encontrada em api_gemini.py")
         sys.exit(1)

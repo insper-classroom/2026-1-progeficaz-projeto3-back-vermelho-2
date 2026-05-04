@@ -7,13 +7,13 @@ Backend do projeto **Vocacionar**, feito em Flask, com persistência em MongoDB 
 O repositório está organizado em duas partes:
 
 - `server.py` e `utils.py`: API Flask principal com CRUD de cursos.
-- `gemini/`: scripts auxiliares para comparação, explicação, especialização e questionário com a API Gemini.
+- `gemini/`: scripts auxiliares para comparação, explicação, especialização e questionário com a api_gemini.
 
 ## Requisitos
 
 - Python 3.13+ ou compatível
 - MongoDB Atlas
-- Chave da API Gemini para os utilitários em `gemini/`
+- Chave da api_gemini para os utilitários em `gemini/`
 
 ## Instalação
 
@@ -69,7 +69,7 @@ pytest test_api.py
 
 ## Utilitários Gemini
 
-Os scripts em `gemini/` usam a chave `GEMINI_API_KEY` em um arquivo `.env` dentro da própria pasta.
+Os scripts em `gemini/` usam a chave `GEMINI_API_KEY` e a conexão `MONGO_URI` em um arquivo `.env` dentro da própria pasta.
 
 Exemplo de arquivo:
 
@@ -77,6 +77,8 @@ Exemplo de arquivo:
 GEMINI_API_KEY=sua_chave_da_gemini
 GOOGLE_API_KEY=opcional
 GEMINI_MODEL=gemini-2.5-flash
+MONGO_URI=sua_string_de_conexao_mongodb
+MONGO_DB_NAME=vocacionar
 ```
 
 Para preparar esse ambiente, consulte [gemini/README.md](gemini/README.md).
@@ -97,3 +99,11 @@ As dependências do backend principal e dos utilitários Gemini foram unificadas
 - Credenciais não devem ser commitadas.
 - O pacote `gemini/` é um apoio local e não substitui o backend Flask principal.
 - O projeto ainda pode evoluir para separar melhor os modelos do MongoDB e expor endpoints mais alinhados ao Vocacionar.
+
+## Documentação da API
+
+Este projeto inclui documentação detalhada da API e um resumo técnico. Mantemos os artefatos originais na raiz e um resumo rápido em `docs/` para referência rápida.
+
+- Guia completo: [API_REST_GUIA.md](API_REST_GUIA.md)
+- Resumo técnico: [API_REST_RESUMO.txt](API_REST_RESUMO.txt)
+- Resumo rápido (docs): [docs/API_REST_SUMMARY.md](docs/API_REST_SUMMARY.md)

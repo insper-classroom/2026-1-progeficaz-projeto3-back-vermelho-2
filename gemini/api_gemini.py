@@ -1,13 +1,14 @@
-import os
-import time
-import random
-import sqlite3
-import datetime
 import argparse
+import datetime
 import json
-from pathlib import Path
-from typing import List, Optional
+import os
+import random
+import time
 from functools import wraps
+from pathlib import Path
+
+from bson import ObjectId
+from pymongo import MongoClient
 
 from dotenv import load_dotenv
 from google import genai
@@ -53,103 +54,83 @@ def exponential_backoff(max_retries: int = MAX_RETRIES, initial_backoff: float =
     
 
 class DatabaseService:
-    """Serviço simples baseado em SQLite para armazenar respostas e contagens de requisições."""
-    def __init__(self, db_path: str = "gemini.db"):
-        self.db_path = db_path
+    """Serviço baseado em MongoDB para armazenar respostas e contagens de requisições."""
+
+    def __init__(self, mongo_uri: str | None = None, db_name: str | None = None):
+        load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
+        self.mongo_uri = mongo_uri or os.getenv("MONGO_URI")
+        self.db_name = db_name or os.getenv("MONGO_DB_NAME", "planejador_carreira")
+
+        if not self.mongo_uri:
+            raise RuntimeError("MONGO_URI nao encontrada. Crie um arquivo .env com MONGO_URI=sua_string")
+
+        self.client = MongoClient(self.mongo_uri)
+        self.db = self.client[self.db_name]
+        self.responses = self.db["responses"]
+        self.requests = self.db["requests"]
         self._init_db()
 
-    def _connect(self):
-        return sqlite3.connect(self.db_path, detect_types=sqlite3.PARSE_DECLTYPES)
-
     def _init_db(self):
-        with self._connect() as conn:
-            cur = conn.cursor()
-            cur.execute(
-                """
-                CREATE TABLE IF NOT EXISTS responses (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    category TEXT NOT NULL,
-                    value_key TEXT NOT NULL,
-                    response TEXT NOT NULL,
-                    created_at TIMESTAMP NOT NULL DEFAULT (datetime('now'))
-                )
-                """
-            )
-            cur.execute(
-                "CREATE INDEX IF NOT EXISTS idx_cat_val ON responses(category, value_key)"
-            )
-            cur.execute(
-                """
-                CREATE TABLE IF NOT EXISTS requests (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    requested_at TIMESTAMP NOT NULL DEFAULT (datetime('now')),
-                    success INTEGER NOT NULL DEFAULT 0
-                )
-                """
-            )
-            conn.commit()
+        self.responses.create_index([("category", 1), ("value_key", 1)])
+        self.requests.create_index("requested_at")
+
+    @staticmethod
+    def _utcnow():
+        return datetime.datetime.now(datetime.timezone.utc)
 
     def save_response(self, category: str, value_key: str, response_text: str) -> None:
-        with self._connect() as conn:
-            cur = conn.cursor()
-            cur.execute(
-                "INSERT INTO responses (category, value_key, response) VALUES (?, ?, ?)",
-                (category, value_key, response_text),
-            )
-            conn.commit()
+        self.responses.insert_one(
+            {
+                "category": category,
+                "value_key": value_key,
+                "response": response_text,
+                "created_at": self._utcnow(),
+            }
+        )
 
     def get_responses(self, category: str, value_key: str):
-        with self._connect() as conn:
-            cur = conn.cursor()
-            cur.execute(
-                "SELECT response, created_at FROM responses WHERE category = ? AND value_key = ? ORDER BY created_at DESC",
-                (category, value_key),
+        docs = (
+            self.responses.find(
+                {"category": category, "value_key": value_key},
+                {"response": 1, "created_at": 1},
             )
-            return cur.fetchall()
+            .sort("created_at", -1)
+        )
+        return [(doc["response"], doc.get("created_at")) for doc in docs]
 
     def count_since(self, seconds: int) -> int:
-        since_ts = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(seconds=seconds)).strftime("%Y-%m-%d %H:%M:%S")
-        with self._connect() as conn:
-            cur = conn.cursor()
-            cur.execute(
-                "SELECT COUNT(1) FROM requests WHERE datetime(requested_at) >= datetime(?)",
-                (since_ts,),
-            )
-            return cur.fetchone()[0]
+        since_ts = self._utcnow() - datetime.timedelta(seconds=seconds)
+        return self.requests.count_documents({"requested_at": {"$gte": since_ts}})
 
     def count_today(self) -> int:
-        today = datetime.date.today().strftime("%Y-%m-%d")
-        with self._connect() as conn:
-            cur = conn.cursor()
-            cur.execute(
-                "SELECT COUNT(1) FROM requests WHERE date(requested_at) = date(?)",
-                (today,),
-            )
-            return cur.fetchone()[0]
+        today = datetime.datetime.now(datetime.timezone.utc).date()
+        start = datetime.datetime.combine(today, datetime.time.min, tzinfo=datetime.timezone.utc)
+        end = datetime.datetime.combine(today, datetime.time.max, tzinfo=datetime.timezone.utc)
+        return self.requests.count_documents({"requested_at": {"$gte": start, "$lte": end}})
 
     def oldest_timestamp_since(self, seconds: int):
-        since_ts = (datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(seconds=seconds)).strftime("%Y-%m-%d %H:%M:%S")
-        with self._connect() as conn:
-            cur = conn.cursor()
-            cur.execute(
-                "SELECT MIN(requested_at) FROM requests WHERE datetime(requested_at) >= datetime(?)",
-                (since_ts,),
-            )
-            row = cur.fetchone()
-            return row[0] if row else None
+        since_ts = self._utcnow() - datetime.timedelta(seconds=seconds)
+        doc = self.requests.find(
+            {"requested_at": {"$gte": since_ts}},
+            {"requested_at": 1},
+        ).sort("requested_at", 1).limit(1)
+        first = next(iter(doc), None)
+        return first["requested_at"] if first else None
 
-    def log_request(self, success: bool = False) -> int:
-        with self._connect() as conn:
-            cur = conn.cursor()
-            cur.execute("INSERT INTO requests (success) VALUES (?)", (1 if success else 0,))
-            conn.commit()
-            return cur.lastrowid
+    def log_request(self, success: bool = False) -> str:
+        result = self.requests.insert_one(
+            {
+                "requested_at": self._utcnow(),
+                "success": bool(success),
+            }
+        )
+        return str(result.inserted_id)
 
-    def update_request_status(self, request_id: int, success: bool) -> None:
-        with self._connect() as conn:
-            cur = conn.cursor()
-            cur.execute("UPDATE requests SET success = ? WHERE id = ?", (1 if success else 0, request_id))
-            conn.commit()
+    def update_request_status(self, request_id: str, success: bool) -> None:
+        self.requests.update_one(
+            {"_id": ObjectId(request_id)},
+            {"$set": {"success": bool(success)}},
+        )
 
 class GeminiService:
     def __init__(self, model: str = DEFAULT_MODEL) -> None:
@@ -257,8 +238,6 @@ def questionario() -> None:
     print("=== Resultado ===")
     print(gemini.generate_json(prompt_final))
 
-
-
 def explicar() -> None:
     x = input("curso:")
     
@@ -306,7 +285,6 @@ def comparar() -> None:
     key = f"{c1}|{c2}"
     print(gemini.process_request("comparar", key, prompt))
 
-
 def listar() -> None:
     gemini = GeminiService()
     base_path = Path(__file__).with_name("info.json")
@@ -325,8 +303,6 @@ def listar() -> None:
 
     print("\n=== Carregando... ===")
     print(gemini.process_request("listar","", prompt, json_mode=True))
-
-
 
 def especializar() -> None:
     curso = input("Curso: ")

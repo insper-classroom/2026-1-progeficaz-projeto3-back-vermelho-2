@@ -1,14 +1,53 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import sys
 import argparse
 import json
-import sqlite3
+import os
+import sys
+
+from dotenv import load_dotenv
+from pymongo import MongoClient
 
 
 def load_info(path: Path):
     with path.open('r', encoding='utf-8') as f:
         return json.load(f)
+
+
+def load_from_mongo():
+    load_dotenv(dotenv_path=Path(__file__).with_name('.env'))
+    mongo_uri = os.getenv('MONGO_URI')
+    mongo_db_name = os.getenv('MONGO_DB_NAME', 'planejador_carreira')
+
+    if not mongo_uri:
+        print('MONGO_URI não encontrada. Use --local para ler o arquivo info.json.')
+        sys.exit(1)
+
+    client = MongoClient(mongo_uri)
+    db = client[mongo_db_name]
+    response_collection = db['responses']
+
+    rows = response_collection.find(
+        {'category': 'explicar'},
+        {'value_key': 1, 'response': 1, 'created_at': 1},
+    ).sort('created_at', -1)
+
+    cursos = []
+    for doc in rows:
+        value_key = doc.get('value_key', '')
+        response_text = doc.get('response', '')
+
+        try:
+            obj = json.loads(response_text)
+            if isinstance(obj, dict) and 'Curso' in obj:
+                cursos.append(obj)
+            else:
+                cursos.append({'Curso': value_key, 'Descricao': '', 'Faculdades': [], 'Carreiras': [], 'Profissionalizacoes': [], 'raw': obj})
+        except Exception:
+            cursos.append({'Curso': value_key, 'Descricao': response_text, 'Faculdades': [], 'Carreiras': [], 'Profissionalizacoes': []})
+
+    client.close()
+    return cursos
 
 
 if __name__ == "__main__":
@@ -27,34 +66,15 @@ if __name__ == "__main__":
         data = load_info(info_path)
         cursos = data.get('lista_cursos', [])
     else:
-        db_path = Path(__file__).with_name('gemini.db')
-        if not db_path.exists():
-            print(f"Banco não encontrado: {db_path}. Use --local para ler o arquivo info.json em vez disso.")
-            sys.exit(1)
+        cursos = load_from_mongo()
 
-        conn = sqlite3.connect(str(db_path))
-        cur = conn.cursor()
-        cur.execute("SELECT value_key, response, created_at FROM responses WHERE category=? ORDER BY created_at DESC", ('explicar',))
-        rows = cur.fetchall()
-
-        if not rows:
+        if not cursos:
             info_path = Path(__file__).with_name('info.json')
             if not info_path.exists():
-                print(f"Nenhuma entrada 'explicar' no DB e {info_path} não encontrado.")
+                print(f"Nenhuma entrada 'explicar' no MongoDB e {info_path} não encontrado.")
                 sys.exit(0)
             data = load_info(info_path)
             cursos = data.get('lista_cursos', [])
-        else:
-            for value_key, response_text, created_at in rows:
-                try:
-                    obj = json.loads(response_text)
-                    if isinstance(obj, dict) and 'Curso' in obj:
-                        cursos.append(obj)
-                    else:
-                        cursos.append({'Curso': value_key, 'Descricao': '', 'Faculdades': [], 'Carreiras': [], 'Profissionalizacoes': [], 'raw': obj})
-                except Exception:
-                    cursos.append({'Curso': value_key, 'Descricao': response_text, 'Faculdades': [], 'Carreiras': [], 'Profissionalizacoes': []})
-        conn.close()
 
     result = {'lista': {'lista_cursos': cursos}}
 

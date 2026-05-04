@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>API Test Page — Planejador de Carreiras</title>
+  <style>
+    body{font-family:Segoe UI,Arial;padding:18px;background:#f7f9fc}
+    h1{margin-top:0}
+    .card{background:#fff;border-radius:6px;padding:12px;margin:10px 0;box-shadow:0 1px 4px rgba(3,13,26,.08)}
+    label{display:block;margin:6px 0 2px}
+    input[type=text], textarea{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px}
+    button{margin-top:8px;padding:8px 12px;border:none;border-radius:4px;background:#2563eb;color:#fff}
+    pre{background:#0b1220;color:#e6eef8;padding:12px;border-radius:6px;overflow:auto}
+    .row{display:flex;gap:12px}
+    .col{flex:1}
+  </style>
+</head>
+<body>
+  <h1>API Test Page — Planejador de Carreiras</h1>
+  <p>Inicie a API (python api.py). Se servir esta página via servidor HTTP, ficará mais confiável: <code>python -m http.server 8000</code>.</p>
+
+  <div class="card">
+    <h3>Health / Stats / Debug</h3>
+    <div class="row">
+      <div class="col">
+        <button onclick="call('/api/health')">Health</button>
+        <button onclick="call('/api/stats')">Stats</button>
+        <button onclick="call('/api/debug')">Debug (limit=3)</button>
+      </div>
+      <div class="col">
+        <label>Resposta</label>
+        <pre id="out">Pronto para testar...</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Listar</h3>
+    <label><input type="checkbox" id="refresh"> Forçar refresh (?refresh=1)</label>
+    <button onclick="listar()">Listar</button>
+  </div>
+
+  <div class="card">
+    <h3>Comparar</h3>
+    <label>Curso 1</label>
+    <input id="c1" type="text" value="Engenharia">
+    <label>Curso 2</label>
+    <input id="c2" type="text" value="Medicina">
+    <button onclick="comparar()">Comparar</button>
+  </div>
+
+  <div class="card">
+    <h3>Especializar</h3>
+    <label>Curso</label>
+    <input id="esp" type="text" value="Engenharia">
+    <button onclick="especializar()">Especializar</button>
+  </div>
+
+  <div class="card">
+    <h3>Explicar</h3>
+    <label>Curso</label>
+    <input id="exp" type="text" value="Biologia">
+    <button onclick="explicar()">Explicar</button>
+  </div>
+
+  <div class="card">
+    <h3>Questionário (JSON do frontend)</h3>
+    <label>Cole aqui o JSON de respostas (array de perguntas/respostas)</label>
+    <textarea id="qjson" rows="8">[{"id":"q1","resposta":"Gosto de ciências"}]</textarea>
+    <button onclick="enviarQuestionario()">Enviar Questionário</button>
+  </div>
+
+  <script>
+    const API_BASE = window.location.hostname === '127.0.0.1' ? 'http://127.0.0.1:5000' : 'http://127.0.0.1:5000';
+
+    async function call(path){
+      const url = API_BASE + path + (path.includes('debug') ? '?limit=3' : '');
+      try{
+        const r = await fetch(url);
+        const j = await r.json();
+        document.getElementById('out').textContent = JSON.stringify(j, null, 2);
+      }catch(e){
+        document.getElementById('out').textContent = 'Erro: '+e;
+      }
+    }
+
+    async function listar(){
+      const refresh = document.getElementById('refresh').checked ? '?refresh=1' : '';
+      await call('/api/listar' + refresh);
+    }
+
+    async function comparar(){
+      const c1 = document.getElementById('c1').value;
+      const c2 = document.getElementById('c2').value;
+      const r = await fetch(API_BASE + '/api/comparar', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({curso1:c1, curso2:c2})
+      });
+      const j = await r.json(); document.getElementById('out').textContent = JSON.stringify(j, null, 2);
+    }
+
+    async function especializar(){
+      const curso = document.getElementById('esp').value;
+      const r = await fetch(API_BASE + '/api/especializar', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({curso})});
+      const j = await r.json(); document.getElementById('out').textContent = JSON.stringify(j, null, 2);
+    }
+
+    async function explicar(){
+      const curso = document.getElementById('exp').value;
+      const r = await fetch(API_BASE + '/api/explicar', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({curso})});
+      const j = await r.json(); document.getElementById('out').textContent = JSON.stringify(j, null, 2);
+    }
+
+    async function enviarQuestionario(){
+      let payload;
+      try{
+        payload = JSON.parse(document.getElementById('qjson').value);
+      }catch(e){ document.getElementById('out').textContent = 'JSON inválido: '+e; return; }
+
+      const r = await fetch(API_BASE + '/api/questionario', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({answers: payload})});
+      if(r.status===404){ document.getElementById('out').textContent = 'Rota /api/questionario não implementada.'; return; }
+      try{ const j = await r.json(); document.getElementById('out').textContent = JSON.stringify(j, null, 2); }
+      catch(e){ document.getElementById('out').textContent = 'Erro ao parsear resposta: '+e; }
+    }
+  </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Utilitários Gemini para o projeto Vocacionar
 
-Este diretório guarda scripts auxiliares usados para gerar respostas estruturadas com a API Gemini. Eles servem como apoio para comparação, explicação, especialização e questionário vocacional.
+Este diretório guarda scripts auxiliares usados para gerar respostas estruturadas com a [api_gemini.py](api_gemini.py). Eles servem como apoio para comparação, explicação, especialização e questionário vocacional.
 
 ## 1) Criar ambiente virtual
 
@@ -15,28 +15,29 @@ pip install -r ../requirements.txt
 
 ## 3) Configurar credenciais
 
-1. Copie `.env.example` para `.env`
-2. Preencha `GEMINI_API_KEY`
+Crie um arquivo `.env` nesta pasta com:
 
-Exemplo:
-
+```env
 GEMINI_API_KEY=sua_chave_real
+MONGO_URI=sua_string_de_conexao_mongodb
+MONGO_DB_NAME=vocacionar
+```
 
 ## 4) Executar os modos
 
-python "api gemini.py" explicar
-python "api gemini.py" comparar
-python "api gemini.py" questionario
+python "api_gemini.py" explicar
+python "api_gemini.py" comparar
+python "api_gemini.py" questionario
 
 ## O que este projeto faz
 
 - Gera texto e JSON com `gemini-2.5-flash`
-- Reaproveita respostas salvas em SQLite local
+- Reaproveita respostas salvas em MongoDB
 - Produz saídas para uso no backend Flask do Vocacionar
 
 ## Arquivo principal
 
-- `api gemini.py`: classe `GeminiService` com métodos:
+- `api_gemini.py`: classe `GeminiService` com métodos:
   - `generate_text(prompt)`
   - `generate_json(prompt)`
   - `process_request(category, value_key, prompt, json_mode=False)`
