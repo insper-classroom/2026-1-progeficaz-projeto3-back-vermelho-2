@@ -6,14 +6,14 @@ load_dotenv('.cred')
 
 client = MongoClient(os.getenv("MONGO_URI"))
 db = client["planejador_carreira"]
-col = db["cursos"]
+col = db["responses"]
 
 def serialize(doc):
     return {
         "_id": str(doc["_id"]),
-        "titulo": doc["titulo"],
-        "descricao": doc["descricao"],
-        "local": doc["local"]
+        "category": doc["category"],
+        "value_key": doc["value_key"],
+        "response": doc["response"]
     }
 
 def get_all_cursos():
