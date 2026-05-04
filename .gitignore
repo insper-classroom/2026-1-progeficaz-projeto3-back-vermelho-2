@@ -3,3 +3,10 @@ __pycache__
 gemini/.env
 gemini/.venv/
 gemini/*.db
+gemini.db
+*.db
+.env
+.cred
+venv/
+.venv/
+pycache/
