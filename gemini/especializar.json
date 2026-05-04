@@ -1,29 +1,9 @@
 {
   "_id": "nome_especializacao",
   "titulo": "Nome da Especialização",
-  "descricao": "Explicacao da especializacao entre 300 e 800 caracteres",
+  "descricao": "Explicacao da especializacao entre 300 e 800 caracteres. Inclua trilhas de formacao, cargos comuns, habilidades chave e rotina pratica.",
   "local": [
     "Campus onde oferecido - Instituição 1",
     "Campus onde oferecido - Instituição 2"
-  ],
-  "trilhas_de_formacao": [
-    {
-      "tipo": "Graduacao, Tecnologo, Bootcamp ou Certificacao",
-      "nome": "Exemplo do que buscar",
-      "requisitos": "O que é necessário para entrar ou concluir",
-      "perfil_ideal": "Motivo comportamental ou de interesse de quem escolhe este caminho"
-    }
-  ],
-  "cargos_comuns": [
-    "Nome da Vaga Real 1",
-    "Nome da Vaga Real 2"
-  ],
-  "habilidades_chave": [
-    "Ferramenta ou habilidade técnica 1",
-    "Habilidade comportamental 2"
-  ],
-  "rotina_pratica": [
-    "Atividade principal do dia a dia 1",
-    "Atividade principal do dia a dia 2"
   ]
 }

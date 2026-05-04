@@ -1,21 +1,9 @@
 {
   "_id": "Curso1|Curso2",
   "titulo": "Comparação: Curso1 vs Curso2",
-  "descricao": "Um breve parágrafo (300 a 500 caracteres) explicando a principal diferença conceitual entre as duas formações.",
+  "descricao": "Um breve parágrafo explicando a principal diferença conceitual entre as duas formações. Inclua grade curricular, mercado de trabalho, carreiras exclusivas e recomendações por perfil.",
   "local": [
-    {
-      "curso": "Curso1",
-      "materias_unicas": ["Topico especifico 1", "Topico especifico 2"],
-      "carreiras_exclusivas": ["Carreira A", "Carreira B"],
-      "escolha_se": ["Motivo comportamental ou de interesse 1", "Motivo 2"]
-    },
-    {
-      "curso": "Curso2",
-      "materias_unicas": ["Topico especifico 1", "Topico especifico 2"],
-      "carreiras_exclusivas": ["Carreira C", "Carreira D"],
-      "escolha_se": ["Motivo comportamental ou de interesse 1", "Motivo 2"]
-    }
-  ],
-  "materias_em_comum": ["Materia 1", "Materia 2"],
-  "oportunidades_em_comum": ["Setor X", "Setor Y"]
+    "Curso1: Institução/Campus",
+    "Curso2: Institução/Campus"
+  ]
 }

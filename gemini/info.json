@@ -1,25 +1,9 @@
 {
   "_id": "nome_do_curso",
   "titulo": "Nome do Curso",
-  "descricao": "Explicacao do curso entre 300 e 800 caracteres",
+  "descricao": "Explicacao do curso entre 300 e 800 caracteres. Inclua informacoes sobre grade curricular, carreiras relacionadas, faculdades e profissionalizacoes.",
   "local": [
-    "Nome da faculdade - Campus onde o curso esta disponivel",
-    "Outra faculdade - Campus disponivel"
-  ],
-  "carreiras": [
-    "Carreira 1",
-    "Carreira 2"
-  ],
-  "profissionalizacoes": [
-    "Topico 1",
-    "Topico 2"
-  ],
-  "faculdades": [
-    {
-      "nome": "Nome da faculdade",
-      "campus": "Campus onde o curso esta disponivel",
-      "tipo": "Público ou Privado",
-      "mensalidade": "Valor ou 'Gratuito' se aplicável"
-    }
+    "Nome da faculdade - Campus",
+    "Outra faculdade - Campus"
   ]
 }
