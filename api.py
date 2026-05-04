@@ -30,6 +30,30 @@ CORS(app)
 app.json.ensure_ascii = False  # Suporta português
 app.config['JSON_SORT_KEYS'] = False
 
+
+def normalize_titulo_fields(data):
+    """Remove prefixos como 'Explicar:' do campo titulo em respostas JSON."""
+    prefixes = ("Explicar:", "Especializar:", "Comparação:")
+
+    if isinstance(data, dict):
+        normalized = {}
+        for key, value in data.items():
+            if key == "titulo" and isinstance(value, str):
+                cleaned = value.strip()
+                for prefix in prefixes:
+                    if cleaned.startswith(prefix):
+                        cleaned = cleaned[len(prefix):].strip()
+                        break
+                normalized[key] = cleaned
+            else:
+                normalized[key] = normalize_titulo_fields(value)
+        return normalized
+
+    if isinstance(data, list):
+        return [normalize_titulo_fields(item) for item in data]
+
+    return data
+
 # Inicializar serviços
 try:
     gemini_service = GeminiService()
@@ -138,6 +162,8 @@ def api_comparar():
             response_json = json.loads(response_text)
         except:
             response_json = response_text
+
+        response_json = normalize_titulo_fields(response_json)
         
         return jsonify({
             "status": "success",
@@ -217,6 +243,8 @@ def api_especializar():
             response_json = json.loads(response_text)
         except:
             response_json = response_text
+
+        response_json = normalize_titulo_fields(response_json)
         
         return jsonify({
             "status": "success",
@@ -283,6 +311,7 @@ def api_explicar():
     Não inclua texto fora do JSON e não use markdown.
     O usuario quer as informações sobre cursos de graduação e carreiras.
     Preencha os campos com informações relacionadas ao curso {curso}
+            No campo "titulo", use apenas o nome do curso, sem prefixos como "Explicar:" ou "Especializar:".
     
     Use este modelo como referência:
     {base_template}
@@ -472,6 +501,7 @@ def api_listar():
     Não inclua texto fora do JSON e não use markdown.
     O usuario quer as informações sobre cursos de graduação e carreiras.
     Preencha os campos com informações relacionadas ao curso {query_curso}
+    No campo "titulo", use apenas o nome do curso, sem prefixos como "Explicar:" ou "Especializar:".
     
     Use este modelo como referência:
     {base_template}
@@ -484,6 +514,8 @@ def api_listar():
                     response_json = json.loads(response_text)
                 except Exception:
                     response_json = response_text
+
+                response_json = normalize_titulo_fields(response_json)
 
                 return jsonify({
                     "status": "success",
