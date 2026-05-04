@@ -59,7 +59,7 @@ class DatabaseService:
     def __init__(self, mongo_uri: str | None = None, db_name: str | None = None):
         load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
         self.mongo_uri = mongo_uri or os.getenv("MONGO_URI")
-        self.db_name = db_name or os.getenv("MONGO_DB_NAME", "planejador_carreira")
+        self.db_name = db_name or os.getenv("MONGO_DB_NAME", "cursos")
 
         if not self.mongo_uri:
             raise RuntimeError("MONGO_URI nao encontrada. Crie um arquivo .env com MONGO_URI=sua_string")

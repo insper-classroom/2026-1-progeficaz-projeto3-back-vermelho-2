@@ -1,43 +1,25 @@
 {
-  "lista_cursos": [
+  "_id": "nome_do_curso",
+  "titulo": "Nome do Curso",
+  "descricao": "Explicacao do curso entre 300 e 800 caracteres",
+  "local": [
+    "Nome da faculdade - Campus onde o curso esta disponivel",
+    "Outra faculdade - Campus disponivel"
+  ],
+  "carreiras": [
+    "Carreira 1",
+    "Carreira 2"
+  ],
+  "profissionalizacoes": [
+    "Topico 1",
+    "Topico 2"
+  ],
+  "faculdades": [
     {
-      "Curso": "Nome do curso",
-      "Descricao": "Explicacao do curso entre 300 e 800 caracteres",
-      "Faculdades": [
-        {
-          "Faculdade": "Nome da faculdade",
-          "Local": "Campus onde o curso esta disponivel",
-          "Disponibilidade": "Público ou Privado"
-        }
-      ],
-      "Carreiras": [
-        "Carreira 1",
-        "Carreira 2"
-      ],
-      "Profissionalizacoes": [
-        "Topico 1",
-        "Topico 2"
-      ]
-    },
-    {
-      "Curso": "Nome do curso",
-      "Descricao": "Explicacao do curso entre 300 e 800 caracteres",
-      "Faculdades": [
-        {
-          "Faculdade": "Nome da faculdade",
-          "Local": "Campus onde o curso esta disponivel",
-          "Disponibilidade": "Público ou Privado",
-          "Mensalidade": "Valor da mensalidade / mostre essa opção apenas se a disponibilidade contar como Privado"
-        }
-      ],
-      "Carreiras": [
-        "Carreira 1",
-        "Carreira 2"
-      ],
-      "Profissionalizacoes": [
-        "Topico 1",
-        "Topico 2"
-      ]
+      "nome": "Nome da faculdade",
+      "campus": "Campus onde o curso esta disponivel",
+      "tipo": "Público ou Privado",
+      "mensalidade": "Valor ou 'Gratuito' se aplicável"
     }
   ]
 }

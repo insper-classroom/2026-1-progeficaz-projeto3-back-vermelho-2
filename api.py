@@ -521,14 +521,14 @@ def api_listar():
                     response_text_doc = doc.get('response', '')
                     try:
                         obj = _json.loads(response_text_doc)
-                        if isinstance(obj, dict) and 'Curso' in obj:
+                        if isinstance(obj, dict) and ('titulo' in obj or '_id' in obj):
                             cursos.append(obj)
                         else:
-                            cursos.append({'Curso': value_key, 'Descricao': '', 'Faculdades': [], 'Carreiras': [], 'Profissionalizacoes': [], 'raw': obj})
+                            cursos.append({'_id': value_key, 'titulo': value_key, 'descricao': '', 'local': [], 'raw': obj})
                     except Exception:
-                        cursos.append({'Curso': value_key, 'Descricao': response_text_doc, 'Faculdades': [], 'Carreiras': [], 'Profissionalizacoes': []})
+                        cursos.append({'_id': value_key, 'titulo': value_key, 'descricao': response_text_doc, 'local': []})
 
-                result_obj = {"lista": {"lista_cursos": cursos}}
+                result_obj = {"cursos": cursos}
 
                 # Cachear o resultado para "listar" para próximas requisições
                 try:
