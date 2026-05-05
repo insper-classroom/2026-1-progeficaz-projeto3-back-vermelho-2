@@ -54,6 +54,33 @@ def normalize_titulo_fields(data):
 
     return data
 
+
+def normalize_listar_payload(data):
+    """Achata respostas de listagem que venham com lista_cursos aninhado."""
+    if not isinstance(data, dict):
+        return data
+
+    lista = data.get("lista_cursos")
+    if not isinstance(lista, list):
+        return data
+
+    cursos = []
+    for item in lista:
+        if isinstance(item, dict) and isinstance(item.get("lista_cursos"), list):
+            cursos.extend(item["lista_cursos"])
+        elif isinstance(item, dict) and len(item) == 1:
+            valor_unico = next(iter(item.values()))
+            if isinstance(valor_unico, list):
+                cursos.extend(valor_unico)
+            else:
+                cursos.append(item)
+        else:
+            cursos.append(item)
+
+    data = dict(data)
+    data["lista_cursos"] = cursos
+    return data
+
 # Inicializar serviços
 try:
     gemini_service = GeminiService()
@@ -97,6 +124,7 @@ def api_comparar():
     Request:
     {
         "curso1": "Engenharia",
+        response_json = normalize_listar_payload(response_json)
         "curso2": "Medicina"
     }
     
@@ -185,9 +213,10 @@ def api_especializar():
     
     Request:
     {
-        "curso": "Engenharia"
+            result_obj = {"lista_cursos": cursos}
     }
     
+        response_json = normalize_listar_payload(response_json)
     Response:
     {
         "status": "success",
@@ -560,7 +589,7 @@ def api_listar():
                     except Exception:
                         cursos.append({'_id': value_key, 'titulo': value_key, 'descricao': response_text_doc, 'local': []})
 
-                result_obj = {"cursos": cursos}
+                result_obj = {"lista_cursos": cursos}
 
                 # Cachear o resultado para "listar" para próximas requisições
                 try:
@@ -593,6 +622,8 @@ def api_listar():
             response_json = json.loads(response_text)
         except:
             response_json = response_text
+
+        response_json = normalize_listar_payload(response_json)
         
         return jsonify({
             "status": "success",

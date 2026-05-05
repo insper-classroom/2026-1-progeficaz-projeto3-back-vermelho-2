@@ -25,10 +25,10 @@ def load_from_mongo():
 
     client = MongoClient(mongo_uri)
     db = client[mongo_db_name]
-    response_collection = db['responses']
+    response_collection = db['cursos']
 
     rows = response_collection.find(
-        {'category': 'explicar'},
+        {},
         {'value_key': 1, 'response': 1, 'created_at': 1},
     ).sort('created_at', -1)
 
@@ -48,6 +48,18 @@ def load_from_mongo():
 
     client.close()
     return cursos
+
+
+def normalize_courses(cursos):
+    normalizados = []
+    for item in cursos:
+        if isinstance(item, dict) and isinstance(item.get('lista_cursos'), list):
+            normalizados.extend(item['lista_cursos'])
+        elif isinstance(item, dict) and len(item) == 1 and isinstance(next(iter(item.values())), list):
+            normalizados.extend(next(iter(item.values())))
+        else:
+            normalizados.append(item)
+    return normalizados
 
 
 if __name__ == "__main__":
@@ -76,7 +88,8 @@ if __name__ == "__main__":
             data = load_info(info_path)
             cursos = data.get('lista_cursos', [])
 
-    result = {'lista': {'lista_cursos': cursos}}
+            cursos = normalize_courses(cursos)
+            result = {'lista_cursos': cursos}
 
     if args.export:
         out_path = Path(args.export)

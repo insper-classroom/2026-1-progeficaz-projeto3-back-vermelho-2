@@ -66,7 +66,7 @@ class DatabaseService:
 
         self.client = MongoClient(self.mongo_uri)
         self.db = self.client[self.db_name]
-        self.responses = self.db["responses"]
+        self.responses = self.db["cursos"]
         self.requests = self.db["requests"]
         self._init_db()
 
