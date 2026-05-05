@@ -5,8 +5,8 @@ from pymongo import MongoClient
 load_dotenv('.cred')
 
 client = MongoClient(os.getenv("MONGO_URI"))
-db = client["planejador_carreira"]
-col = db["cursos"]
+db = client["cursos"]
+col = db["items"]
 
 def serialize(doc):
     return {
