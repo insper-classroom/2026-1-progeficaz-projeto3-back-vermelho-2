@@ -28,7 +28,7 @@ def load_from_mongo():
     response_collection = db['cursos']
 
     rows = response_collection.find(
-        {},
+        {"category" :"explicar"},
         {'value_key': 1, 'response': 1, 'created_at': 1},
     ).sort('created_at', -1)
 
